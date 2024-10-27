@@ -12,7 +12,7 @@ endif()
 project ("Nozzle")
 
 # Add source to this project's executable.
-add_executable (Nozzle "Nozzle.cpp" "Nozzle.h")
+add_executable (Nozzle "main.cpp" )
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Nozzle PROPERTY CXX_STANDARD 20)
