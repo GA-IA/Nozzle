@@ -380,4 +380,5 @@ _deps
 *-prefix/
 
 ### Nozzle Custom ###
-Dependencies/*
+[Dd]ependencies/*
+![Dd]ependencies/put_your_dependencies_here.txt
