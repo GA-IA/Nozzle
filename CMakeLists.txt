@@ -3,6 +3,9 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
+# Add dependencies directory
+set(SDL3_DIR "${CMAKE_SOURCE_DIR}/Dependencies/SDL3-3.1.6/cmake")
+
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
   cmake_policy(SET CMP0141 NEW)
@@ -11,8 +14,17 @@ endif()
 
 project ("Nozzle")
 
+find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3)
+
 # Add source to this project's executable.
 add_executable (Nozzle "main.cpp" )
+
+target_link_libraries(Nozzle PRIVATE SDL3::SDL3)
+
+add_custom_command(TARGET Nozzle POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy -t $<TARGET_FILE_DIR:Nozzle> $<TARGET_RUNTIME_DLLS:Nozzle>
+  COMMAND_EXPAND_LISTS
+)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Nozzle PROPERTY CXX_STANDARD 20)
