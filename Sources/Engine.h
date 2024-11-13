@@ -1,6 +1,7 @@
 #pragma once
 #include <mutex>
 #include <SDL3/SDL.h>
+#include "Renderer.h"
 
 struct SDLWindowConfig {
 	const char* title;
@@ -18,10 +19,12 @@ private:
 	//Engine
 	bool is_running = false;
 	SDL_Window* window;
+	//Renderer
+	SDLRenderer* renderer;
 protected:
 	//Singleton
-	Engine() {};
-	~Engine() {};
+	Engine();
+	~Engine();
 public:
 	//Singleton
 	Engine(Engine& other) = delete;
@@ -36,5 +39,5 @@ public:
 	}
 	int Create(SDLWindowConfig config);
 	void Loop();
-	int Destroy();
+	void Destroy();
 };

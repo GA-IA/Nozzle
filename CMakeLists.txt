@@ -17,7 +17,7 @@ project ("Nozzle")
 find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3)
 
 # Add source to this project's executable.
-add_executable (Nozzle "Sources/main.cpp"  "Sources/Engine.cpp" "Sources/Engine.h" )
+add_executable (Nozzle "Sources/main.cpp"  "Sources/Engine.cpp" "Sources/Engine.h"  "Sources/Renderer.h" "Sources/Renderer.cpp")
 
 target_link_libraries(Nozzle PRIVATE SDL3::SDL3)
 
