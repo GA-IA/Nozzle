@@ -11,8 +11,8 @@ int main(int argc, char* argv[])
 	Engine* engine = Engine::Instance();
 	SDLWindowConfig config = SDLWindowConfig(
 		"Nozzle",
-		1280,
-		720,
+		1920,
+		1080,
 		SDL_WINDOW_RESIZABLE
 	);
 	engine->Create(config);

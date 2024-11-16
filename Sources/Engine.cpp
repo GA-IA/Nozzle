@@ -18,7 +18,7 @@ Engine* Engine::Instance() {
 }
 
 int Engine::Create(SDLWindowConfig config) {
-	//Subsyste,
+	//Subsystem
 	if (!SDL_Init(SDL_INIT_VIDEO)) {
 		cerr << SDL_GetError() << "\n";
 		return -1;
@@ -28,6 +28,9 @@ int Engine::Create(SDLWindowConfig config) {
 	//Renderer
 	renderer = new SDLRenderer();
 	renderer->Create(window);
+	//GUI
+	imgui = new ImGuiSystem();
+	imgui->Create(window, renderer->Renderer());
 
 	is_running = true;
 	return 0;
@@ -36,15 +39,20 @@ int Engine::Create(SDLWindowConfig config) {
 void Engine::Loop() {
 	SDL_Event sdlEvent;
 	SDL_PollEvent(&sdlEvent);
+	
 
 	if (sdlEvent.type == SDL_EVENT_QUIT) {
 		is_running = false;
 	}
+	imgui->Clear(&sdlEvent);
 	renderer->Clear();
+	imgui->Present(renderer->Renderer());
 	renderer->Present();
 }
 
 void Engine::Destroy() {
+	imgui->Destroy();
+	delete imgui;
 	renderer->Destroy();
 	delete renderer;
 	SDL_DestroyWindow(window);

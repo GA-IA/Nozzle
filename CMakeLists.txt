@@ -5,6 +5,7 @@ cmake_minimum_required (VERSION 3.8)
 
 # Add dependencies directory
 set(SDL3_DIR "${CMAKE_SOURCE_DIR}/Dependencies/SDL3-3.1.6/cmake")
+set(IMGUI_DIR "${CMAKE_SOURCE_DIR}/Dependencies/imgui")
 
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
@@ -17,9 +18,13 @@ project ("Nozzle")
 find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3)
 
 # Add source to this project's executable.
-add_executable (Nozzle "Sources/main.cpp"  "Sources/Engine.cpp" "Sources/Engine.h"  "Sources/Renderer.h" "Sources/Renderer.cpp")
+add_executable (Nozzle "Sources/main.cpp" "Sources/Engine.cpp" "Sources/Renderer.cpp" "Sources/GUI.cpp")
 
-target_link_libraries(Nozzle PRIVATE SDL3::SDL3)
+add_subdirectory(${IMGUI_DIR})
+
+target_link_libraries(Nozzle PUBLIC SDL3::SDL3)
+target_link_libraries(Nozzle PUBLIC ImGui)
+target_include_directories(Nozzle PUBLIC "${CMAKE_CURRENT_BINARY_DIR}" "${IMGUI_DIR}")  
 
 add_custom_command(TARGET Nozzle POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy -t $<TARGET_FILE_DIR:Nozzle> $<TARGET_RUNTIME_DLLS:Nozzle>

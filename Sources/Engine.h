@@ -2,6 +2,7 @@
 #include <mutex>
 #include <SDL3/SDL.h>
 #include "Renderer.h"
+#include "GUI.h"
 
 struct SDLWindowConfig {
 	const char* title;
@@ -21,6 +22,8 @@ private:
 	SDL_Window* window;
 	//Renderer
 	SDLRenderer* renderer;
+	//GUI
+	ImGuiSystem* imgui;
 protected:
 	//Singleton
 	Engine();

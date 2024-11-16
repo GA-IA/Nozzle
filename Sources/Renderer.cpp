@@ -15,6 +15,7 @@ int SDLRenderer::Create(SDL_Window* window) {
 	return 0;
 }
 void SDLRenderer::Clear() {
+	SDL_SetRenderDrawColorFloat(renderer, 0.13, 0.10, 0.25, 1);
 	SDL_RenderClear(renderer);
 }
 

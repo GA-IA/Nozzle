@@ -14,6 +14,9 @@ class SDLRenderer : public Renderer {
 private:
 	SDL_Renderer* renderer;
 public:
+	SDL_Renderer* Renderer() {
+		return renderer;
+	}
 	int Create(SDL_Window* window);
 	void Clear();
 	void Present();
