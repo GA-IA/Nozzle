@@ -28,6 +28,9 @@ protected:
 	//Singleton
 	Engine();
 	~Engine();
+	void Event();
+	void TopLoop();
+	void BottomLoop();
 public:
 	//Singleton
 	Engine(Engine& other) = delete;

@@ -36,18 +36,27 @@ int Engine::Create(SDLWindowConfig config) {
 	return 0;
 }
 
-void Engine::Loop() {
+void Engine::Event() {
 	SDL_Event sdlEvent;
 	SDL_PollEvent(&sdlEvent);
-	
-
 	if (sdlEvent.type == SDL_EVENT_QUIT) {
 		is_running = false;
 	}
-	imgui->Clear(&sdlEvent);
+	imgui->Event(&sdlEvent);
+}
+void Engine::TopLoop() {
+	imgui->Clear();
 	renderer->Clear();
+}
+void Engine::BottomLoop() {
 	imgui->Present(renderer->Renderer());
 	renderer->Present();
+}
+
+void Engine::Loop() {
+	Event();
+	TopLoop();
+	BottomLoop();
 }
 
 void Engine::Destroy() {

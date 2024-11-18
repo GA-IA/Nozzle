@@ -1,28 +1,24 @@
 #include "GUI.h"
 #include <iostream>
 
-int GUI::Create() { return 0; }
-void GUI::Clear() {}
-void GUI::Present() {}
-void GUI::Destroy() {}
-
-ImGuiSystem::ImGuiSystem(){}
-
 int ImGuiSystem::Create(SDL_Window* window, SDL_Renderer* renderer) {
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO();
-	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // IF using Docking Branch
+	io = &ImGui::GetIO();
+	io->ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+	io->ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+	io->ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
 	ImGui_ImplSDL3_InitForSDLRenderer(window, renderer);
 	ImGui_ImplSDLRenderer3_Init(renderer);
 	return 0;
 }
 
-void ImGuiSystem::Clear(SDL_Event* sdlEvent) {
+void ImGuiSystem::Event(SDL_Event* sdlEvent) {
 	ImGui_ImplSDL3_ProcessEvent(sdlEvent);
+}
+
+void ImGuiSystem::Clear() {
 	ImGui_ImplSDL3_NewFrame();
 	ImGui_ImplSDLRenderer3_NewFrame();
 	ImGui::NewFrame();
