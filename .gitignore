@@ -382,3 +382,4 @@ _deps
 ### Nozzle Custom ###
 [Dd]ependencies/*
 ![Dd]ependencies/put_your_dependencies_here.txt
+![Dd]ependencies/imgui

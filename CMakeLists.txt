@@ -18,7 +18,14 @@ project ("Nozzle")
 find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3)
 
 # Add source to this project's executable.
-add_executable (Nozzle "Sources/main.cpp" "Sources/Engine.cpp" "Sources/Renderer.cpp" "Sources/GUI.cpp" "Sources/IEditor.cpp" "Sources/IEditor.h")
+add_executable (Nozzle 
+"Sources/main.cpp" 
+"Sources/Engine.cpp" 
+"Sources/Renderer.cpp" 
+"Sources/GUI.cpp" 
+"Sources/IEditor.cpp" 
+"Sources/IEditor.h" 
+"Sources/GUI/MainMenu.cpp")
 
 add_subdirectory(${IMGUI_DIR})
 

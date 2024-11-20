@@ -1,13 +1,27 @@
 #pragma once
+#include <vector>
 
-void OnEngineCreate();
-void OnRendererCreate();
-void OnGUICreate();
+class EngineInsertor {	
+protected:
+	std::vector<Editor*> registered_class;
+};
 
-void OnEngineLoop();
-void OnRendererLoop();
-void OnGUILoop();
+class IEditor : private EngineInsertor {
+protected:
+	void RegisterClass();
+};
 
-void OnGUIDestroy();
-void OnRendererDestroy();
-void OnEngineDestroy();
+class Editor : protected IEditor {
+protected:
+	void OnEngineCreate();
+	void OnRendererCreate();
+	void OnGUICreate();
+
+	void OnEngineLoop();
+	void OnRendererLoop();
+	void OnGUILoop();
+
+	void OnGUIDestroy();
+	void OnRendererDestroy();
+	void OnEngineDestroy();
+};
