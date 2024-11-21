@@ -3,6 +3,7 @@
 #include <SDL3/SDL.h>
 #include "Renderer.h"
 #include "GUI.h"
+#include "Editor.h"
 
 struct SDLWindowConfig {
 	const char* title;
@@ -24,6 +25,8 @@ private:
 	SDLRenderer* renderer;
 	//GUI
 	ImGuiSystem* imgui;
+	//Editor
+	Editor* editor;
 protected:
 	//Singleton
 	Engine();

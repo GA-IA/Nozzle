@@ -31,8 +31,12 @@ int Engine::Create(SDLWindowConfig config) {
 	//GUI
 	imgui = new ImGuiSystem();
 	imgui->Create(window, renderer->Renderer());
-
+	editor = new Editor();
+	if (!editor) {
+		cerr << "Cannot create Editor" << "\n";
+	}
 	is_running = true;
+	editor->Start();
 	return 0;
 }
 
@@ -43,6 +47,7 @@ void Engine::Event() {
 		is_running = false;
 	}
 	imgui->Event(&sdlEvent);
+	editor->Event();
 }
 void Engine::TopLoop() {
 	imgui->Clear();
@@ -56,10 +61,13 @@ void Engine::BottomLoop() {
 void Engine::Loop() {
 	Event();
 	TopLoop();
+	editor->Loop();
 	BottomLoop();
 }
 
 void Engine::Destroy() {
+	editor->Destroy();
+	delete editor;
 	imgui->Destroy();
 	delete imgui;
 	renderer->Destroy();

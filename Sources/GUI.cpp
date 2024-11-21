@@ -22,7 +22,6 @@ void ImGuiSystem::Clear() {
 	ImGui_ImplSDL3_NewFrame();
 	ImGui_ImplSDLRenderer3_NewFrame();
 	ImGui::NewFrame();
-	ImGui::ShowDemoWindow();
 }
 
 void ImGuiSystem::Present(SDL_Renderer* renderer) {
