@@ -25,7 +25,8 @@ add_executable (Nozzle
 "Sources/GUI.cpp" 
 "Sources/IEditor.cpp" 
 "Sources/IEditor.h" 
-"Sources/GUI/MainMenu.cpp")
+"Sources/GUI/MainMenu.cpp"
+"Sources/Editor.cpp")
 
 add_subdirectory(${IMGUI_DIR})
 

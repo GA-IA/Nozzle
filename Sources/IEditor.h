@@ -1,27 +1,37 @@
 #pragma once
 #include <vector>
+#include <mutex>
 
-class EngineInsertor {	
+class IEditor{
 protected:
-	std::vector<Editor*> registered_class;
+	virtual void OnEngineCreate();
+	virtual void OnRendererCreate();
+	virtual void OnGUICreate();
+
+	virtual void OnEngineLoop();
+	virtual void OnRendererLoop();
+	virtual void OnGUILoop();
+
+	virtual void OnGUIDestroy();
+	virtual void OnRendererDestroy();
+	virtual void OnEngineDestroy();
 };
 
-class IEditor : private EngineInsertor {
+class Registrar {
+private:
+	//Singleton
+	static Registrar* registrar;
+	static std::mutex _mutex;
 protected:
-	void RegisterClass();
-};
-
-class Editor : protected IEditor {
-protected:
-	void OnEngineCreate();
-	void OnRendererCreate();
-	void OnGUICreate();
-
-	void OnEngineLoop();
-	void OnRendererLoop();
-	void OnGUILoop();
-
-	void OnGUIDestroy();
-	void OnRendererDestroy();
-	void OnEngineDestroy();
+	//Singleton
+	std::vector<IEditor*> registered_class;
+	Registrar();
+	~Registrar();
+public:
+	//Singleton
+	Registrar(Registrar& other) = delete;
+	void operator=(const Registrar&) = delete;
+	static Registrar* Instance();
+	//Registration
+	void RegisterClass(IEditor* editor);
 };
