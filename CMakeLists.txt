@@ -6,6 +6,7 @@ cmake_minimum_required (VERSION 3.8)
 # Add dependencies directory
 set(SDL3_DIR "${CMAKE_SOURCE_DIR}/Dependencies/SDL3-3.1.6/cmake")
 set(IMGUI_DIR "${CMAKE_SOURCE_DIR}/Dependencies/imgui")
+set(IMGUI_NODE_DIR "${CMAKE_SOURCE_DIR}/Dependencies/imguinodeeditor")
 
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
@@ -26,10 +27,13 @@ add_executable (Nozzle
 "Sources/Editor.cpp")
 
 add_subdirectory(${IMGUI_DIR})
+add_subdirectory(${IMGUI_NODE_DIR})
 
 target_link_libraries(Nozzle PUBLIC SDL3::SDL3)
 target_link_libraries(Nozzle PUBLIC ImGui)
+target_link_libraries(Nozzle PUBLIC ImGuiNode)
 target_include_directories(Nozzle PUBLIC "${CMAKE_CURRENT_BINARY_DIR}" "${IMGUI_DIR}")  
+target_include_directories(Nozzle PUBLIC "${CMAKE_CURRENT_BINARY_DIR}" "${IMGUI_NODE_DIR}")
 
 add_custom_command(TARGET Nozzle POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy -t $<TARGET_FILE_DIR:Nozzle> $<TARGET_RUNTIME_DLLS:Nozzle>
