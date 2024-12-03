@@ -27,6 +27,8 @@ private:
 	ImGuiSystem* imgui;
 	//Editor
 	Editor* editor;
+	//Node
+	ImGuiNode* imguiNode;
 protected:
 	//Singleton
 	Engine();

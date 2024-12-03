@@ -45,3 +45,25 @@ void ImGuiSystem::Destroy() {
 	ImGui_ImplSDLRenderer3_Shutdown();
 	ImGui::DestroyContext();
 }
+
+int ImGuiNode::Create() {
+	config.SettingsFile = "Simple.json";
+	context = node::CreateEditor(&config);
+	if (context == nullptr) {
+		cerr << "Cannot Create Imgui Node" << "\n";
+		return 1;
+	}
+	return 0;
+}
+
+void ImGuiNode::Clear() {
+	node::SetCurrentEditor(context);
+}
+
+void ImGuiNode::Present() {
+	node::SetCurrentEditor(nullptr);
+}
+
+void ImGuiNode::Destroy() {
+	node::DestroyEditor(context);
+}

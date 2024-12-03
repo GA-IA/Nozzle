@@ -10,7 +10,7 @@ void Editor::Event() {
 	
 }
 void Editor::Loop() {
-	ImGui::SetWindowFontScale(2);
+	/*ImGui::SetWindowFontScale(2);
 	ImGui::BeginMainMenuBar();
 	if (ImGui::BeginMenu("Files")) {
 		ImGui::MenuItem("New");
@@ -50,7 +50,22 @@ void Editor::Loop() {
 	}
 	ImGui::EndMainMenuBar();
 
-	ImGui::DockSpaceOverViewport();
+	ImGui::DockSpaceOverViewport();*/
+	
+	node::Begin("My Editor", ImVec2(0.0, 0.0f));
+	int uniqueId = 1;
+	// Start drawing nodes.
+	node::BeginNode(uniqueId++);
+	ImGui::Text("Node A");
+	node::BeginPin(uniqueId++, node::PinKind::Input);
+	ImGui::Text("-> In");
+	node::EndPin();
+	ImGui::SameLine();
+	node::BeginPin(uniqueId++, node::PinKind::Output);
+	ImGui::Text("Out ->");
+	node::EndPin();
+	node::EndNode();
+	node::End();
 }
 void Editor::Destroy() {
 	

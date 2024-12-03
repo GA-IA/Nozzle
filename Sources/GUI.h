@@ -14,3 +14,17 @@ public:
 	void Present(SDL_Renderer* renderer);
 	void Destroy();
 };
+
+#include "imgui_node_editor.h"
+
+namespace node = ax::NodeEditor;
+class ImGuiNode : public ImGuiSystem{
+private:
+	node::Config config;
+	node::EditorContext* context = nullptr;
+public:
+	int Create();
+	void Clear();
+	void Present();
+	void Destroy();
+};
