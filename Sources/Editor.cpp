@@ -10,7 +10,6 @@ void Editor::Event() {
 	
 }
 void Editor::Loop() {
-	/*ImGui::SetWindowFontScale(2);
 	ImGui::BeginMainMenuBar();
 	if (ImGui::BeginMenu("Files")) {
 		ImGui::MenuItem("New");
@@ -50,8 +49,12 @@ void Editor::Loop() {
 	}
 	ImGui::EndMainMenuBar();
 
-	ImGui::DockSpaceOverViewport();*/
-	
+	ImGui::DockSpaceOverViewport();
+
+	ImGui::Begin("Node");
+	ImGui::Button("Node");
+	ImGui::SameLine();
+	ImGui::Button("Code");
 	node::Begin("My Editor", ImVec2(0.0, 0.0f));
 	int uniqueId = 1;
 	// Start drawing nodes.
@@ -66,6 +69,13 @@ void Editor::Loop() {
 	node::EndPin();
 	node::EndNode();
 	node::End();
+	ImGui::End();
+		
+	ImGui::Begin("Terminal");
+	ImGui::End();
+
+	ImGui::Begin("Explorer");
+	ImGui::End();
 }
 void Editor::Destroy() {
 	
